@@ -129,20 +129,20 @@
         <mu1>1.0</mu1>
         <mu2>1.0</mu2>
     </gazebo>
-
-    <!-- Lidar link (visual only) -->
-    <joint name="laser_joint" type="fixed">
+    
+    <!-- RGBD Camera link visuals -->
+    <joint name="camera_joint" type="fixed">
         <parent link="chassis"/>
-        <child link="laser_frame"/>
+        <child link="camera_frame"/>
         <origin xyz="0.1 0 0.175" rpy="0 0 0"/>
     </joint>
-    <link name="laser_frame">
+    <link name="camera_frame">
         <visual>
             <origin xyz="0 0 0"/>
             <geometry>
                 <cylinder length="0.04" radius="0.05"/>
             </geometry>
-            <material name="laser_material">
+            <material name="camera_material">
                 <color rgba="0.13 0.13 0.13 1.0"/>
             </material>
         </visual>

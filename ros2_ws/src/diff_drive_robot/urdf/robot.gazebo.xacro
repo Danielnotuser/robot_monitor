@@ -27,41 +27,49 @@
         </plugin>
     </gazebo>
 
-    <!-- LiDAR (PointCloud2) -->
-    <gazebo reference="laser_frame">
-        <sensor type="gpu_ray" name="lidar_sensor">
+    <!-- RGBD Camera (depth + color) -->
+    <gazebo reference="camera_frame">
+        <sensor type="depth" name="depth_sensor">
             <pose>0 0 0 0 0 0</pose>
             <visualize>true</visualize>
             <update_rate>10.0</update_rate>
-            <ray>
-                <scan>
-                    <horizontal>
-                        <samples>1800</samples>
-                        <resolution>1.0</resolution>
-                        <min_angle>-3.14159</min_angle>
-                        <max_angle>3.14159</max_angle>
-                    </horizontal>
-                    <vertical>
-                        <samples>16</samples>
-                        <resolution>2.0</resolution>
-                        <min_angle>-0.2793</min_angle>
-                        <max_angle>0.2443</max_angle>
-                    </vertical>
-                </scan>
-                <range>
-                    <min>0.2</min>
-                    <max>30.0</max>
-                    <resolution>0.01</resolution>
-                </range>
-                <noise>
-                    <type>gaussian</type>
-                    <mean>0.0</mean>
-                    <stddev>0.008</stddev>
-                </noise>
-                <output_type>point_cloud</output_type>
-            </ray>
-            <topic>pointcloud</topic>
-            <frame_name>laser_frame</frame_name>
+            <camera>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>R_FLOAT32</format>
+                </image>
+                <clip>
+                    <near>0.2</near>
+                    <far>30.0</far>
+                </clip>
+                <horizontal_fov>1.047</horizontal_fov> <!-- 60 градусов -->
+                <vertical_fov>0.785</vertical_fov>    <!-- 45 градусов -->
+            </camera>
+            <topic>camera/depth/image_raw</topic>
+            <frame_name>camera_depth_frame</frame_name>
+            <output_type>image</output_type>
+        </sensor>
+
+        <sensor type="camera" name="color_sensor">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>10.0</update_rate>
+            <camera>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>RGB_INT8</format>
+                </image>
+                <clip>
+                    <near>0.2</near>
+                    <far>30.0</far>
+                </clip>
+                <horizontal_fov>1.047</horizontal_fov>
+                <vertical_fov>0.785</vertical_fov>
+            </camera>
+            <topic>camera/color/image_raw</topic>
+            <frame_name>camera_color_frame</frame_name>
         </sensor>
     </gazebo>
 </robot>

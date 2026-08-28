@@ -59,8 +59,8 @@ def spawn_robots(context, *args, **kwargs):
     # Спавн робота через spawn (если работает)
     spawn_cmd = [
         'ros2', 'run', 'ros_gz_sim', 'create',
-        '-topic', f'/robot_description',
-        '-name', f'diff_bot',
+        '-topic', '/robot_description',
+        '-name', 'diff_bot',
         '-x', '4.0',
         '-y', '0.0',
         '-z', '0.2'
